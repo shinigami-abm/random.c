@@ -29,6 +29,7 @@ typedef struct time{
 	  struct gard *g;
 	  g = (gard *)malloc(sizeof(gard));
           c = strlen(n);
+	  g->next=NULL;
 
 	  for(int i=0; i<c; i++){
 		  g->name[i]= n[i];
@@ -41,6 +42,7 @@ typedef struct time{
        struct interns *it;
        it = (interns *)malloc(sizeof(interns));
        c = strlen(n);
+       it->next= NULL;
 
        for(int i=0; i<c; i++){
 	       it->name[i]=n[i];
@@ -247,6 +249,10 @@ int main(){
    char n[10];
    for(int i=0; i<24; i++){
 	   callander[i].T= i;
+	   callander[i].starti=NULL;
+	   callander[i].startg=NULL;
+           callander[i].endi=NULL;
+           callander[i].endg=NULL;
    }
    bool test= true;
    while( test != false){
