@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define ps 114
+#define ps 115
 
 typedef struct contact{
  char name[100];
@@ -19,7 +19,7 @@ typedef struct contact{
  
  void read_file(){
   FILE *f;
-  char n[100],p[100];
+  char n[100],p[11];
   int ctr;
   f= fopen("contacts.txt", "r");
   printf("Name,Phone Number\n");
@@ -32,30 +32,30 @@ typedef struct contact{
 
  int search(char who[]){
    FILE *f;
-  char n[100],p[100];
+  char n[100],p[11];
   int ctr,i=0;
   f= fopen("contacts.txt", "r");
   while(fscanf(f,"%s %d %s",n,&ctr,p) != EOF){
-   if(strcmp(n, who) == 0){	  
+   if(strcmp(n, who) == 0){
+     fclose(f);	   
     return i;
    }
    i++;
   }
-  return -1;
   fclose(f);
+  return -1;
  }
  
  void update(char p[],char newP[]){
     FILE *f;
-    f= fopen("contacts.txt", "a+");
+    f= fopen("contacts.txt", "r+");
     int count,ctr=-1;
     if(search(p) != -1){
     count = search(p);
     char n[100];
-    fseek(f,3*ps, SEEK_SET);
-    fscanf(f,"%s",n);
+    fseek(f,count*ps, SEEK_SET);
     //printf("%s\n",n);
-    fprintf(f,"%-100s %d %-10s",n,ctr,newP);
+    fprintf(f,"%-100s %d %-10s",p,ctr,newP);
     }
     else{
 	    printf("this person dont exist.\n");
